@@ -12,6 +12,9 @@ import Button from "@mui/material/Button";
 import Tooltip from "@mui/material/Tooltip";
 import MenuItem from "@mui/material/MenuItem";
 import { Link } from "react-router-dom";
+import { useContext } from "react";
+import {CocktailContext} from "./store/store";
+import { useEffect, useState } from "react";
 
 const pages = ["Mainpage", "Login", "Blog"];
 const settings = ["Profile", "Account", "Dashboard", "Logout"];
@@ -19,6 +22,28 @@ const settings = ["Profile", "Account", "Dashboard", "Logout"];
 const ResponsiveAppBar = () => {
   const [anchorElNav, setAnchorElNav] = React.useState(null);
   const [anchorElUser, setAnchorElUser] = React.useState(null);
+
+  const {loginState, setLoginState} = useContext(CocktailContext);
+  const {userName} = useContext(CocktailContext);
+
+  console.log(userName);
+
+
+
+  const loginClickHandler = () => {
+    // ctx.loginState = "attempt";
+    setLoginState("attempt")
+  };
+
+  useEffect(() => {
+    
+  console.log("ctx changed")
+   
+  }, [loginState])
+  
+
+  // console.log(ctx.loginState === "notLogged");
+
 
   const handleOpenNavMenu = (event) => {
     setAnchorElNav(event.currentTarget);
@@ -34,6 +59,16 @@ const ResponsiveAppBar = () => {
   const handleCloseUserMenu = () => {
     setAnchorElUser(null);
   };
+
+const [clickedButton, setclickedButton] = useState()
+
+  const handleUserMenuChoice = (event) => {
+    if (event.target.innerText === 'Logout') {setLoginState("notLogged") 
+    setAnchorElUser(null);
+  }
+  }
+
+
 
   return (
     <AppBar position="static">
@@ -123,10 +158,17 @@ const ResponsiveAppBar = () => {
               </Link>
             ))}
           </Box>
-
+<div>{userName === undefined ? 'Login' : `Welcome ${userName}     ` }</div>
           <Box sx={{ flexGrow: 0 }}>
             <Tooltip title="Open settings">
-              <IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }}>
+              <IconButton
+                onClick={
+                  loginState === "notLogged"
+                    ? loginClickHandler
+                    : handleOpenUserMenu
+                }
+                sx={{ p: 0 }}
+              >
                 <Avatar alt="Remy Sharp" src="/static/images/avatar/2.jpg" />
               </IconButton>
             </Tooltip>
@@ -146,8 +188,8 @@ const ResponsiveAppBar = () => {
               open={Boolean(anchorElUser)}
               onClose={handleCloseUserMenu}
             >
-              {settings.map((setting) => (
-                <MenuItem key={setting} onClick={handleCloseUserMenu}>
+              {settings.map((setting, index) => (
+                <MenuItem key={setting} onClick={handleUserMenuChoice}>
                   <Typography textAlign="center">{setting}</Typography>
                 </MenuItem>
               ))}

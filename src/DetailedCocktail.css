@@ -1,0 +1,8 @@
+.image img {
+  background-color: transparent;
+  width: 200px;
+  height: 200px;
+  border: 0px solid #f1f1f1;
+  display: flex;
+  align-items: center;
+}
