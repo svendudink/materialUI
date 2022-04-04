@@ -6,37 +6,46 @@ import "@fontsource/roboto/700.css";
 import * as React from "react";
 import ResponsiveAppBar from "./ResponsiveAppBar";
 import CocktailBody from "./CocktailBody";
-import { BrowserRouter as Router, Route, Routes, Link } from "react-router-dom";
+import { BrowserRouter as Router, Route, Routes, Link, useParams } from "react-router-dom";
 import LoginGoogle from "./LoginGoogle";
 import DetailedCocktail from "./DetailedCocktail";
-import { useState, useEffect } from "react";
+import { useState, useEffect, useContext } from "react";
 import { createContext } from "react";
 import Loginplace from "./elements/Loginplace";
-import { CocktailsContextProvider } from "./store/store";
+import { CocktailContext, CocktailsContextProvider } from "./store/store";
 
 function App(props) {
-  const [cocktailArray, setCocktailArray] = useState(null);
-  const [cocktailLink] = useState(
-    "https://www.thecocktaildb.com/api/json/v1/1/search.php?s=margarita"
-  );
+  // const [cocktailArray, setCocktailArray] = useState(null);
+  // const [cocktailLink] = useState(
+  //   "https://www.thecocktaildb.com/api/json/v1/1/search.php?s=margarita"
+  // );
+  
 
-  const DataFetcher = async () => {
-    try {
-      const response = await fetch(cocktailLink);
-      console.log(response);
-      const dataASync = await response.json();
-      console.log(dataASync);
-      setCocktailArray(dataASync);
-      // console.log("showCocktails", showCocktails);
-      props.getArr(dataASync);
-    } catch (err) {
-      console.log(err);
-    }
-  };
+  
+  
+  
+  // const DataFetcher = async () => {
+  //   try {
+  //     const response = await fetch(cocktailLink);
+  //     console.log(response);
+  //     const dataASync = await response.json();
+  //     console.log(dataASync);
+  //     setCocktailArray(dataASync);
+      
+  //     // console.log("showCocktails", showCocktails);
+  //     props.getArr(dataASync);
+  //   } catch (err) {
+  //     console.log(err);
+  //   }
+  // };
 
-  useEffect(() => {
-    DataFetcher();
-  }, [cocktailLink]);
+  // const { id } = useParams()
+  // console.log(id);
+  
+
+  // useEffect(() => {
+  //   DataFetcher();
+  // }, [cocktailLink]);
 
   return (
     <div>
@@ -46,12 +55,12 @@ function App(props) {
         <Routes>
           <Route
             path="/Mainpage"
-            element={<CocktailBody cocktailArray={cocktailArray} />}
+            element={<CocktailBody  />}
           />
           <Route path="/Login" element={<LoginGoogle />} />
           <Route
             path="/cocktails/:id"
-            element={<DetailedCocktail arr={cocktailArray} />}
+            element={<DetailedCocktail  />}
           />
         </Routes>
       </Router>

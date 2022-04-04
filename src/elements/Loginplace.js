@@ -14,6 +14,7 @@ import {CocktailContext} from "../store/store";
 // https://firebase.google.com/docs/web/setup#available-libraries
 function Loginplace(props) {
   const {loginState, setLoginState} = useContext(CocktailContext);
+ 
   // Your web app's Firebase configuration
   const firebaseConfig = {
     apiKey: "AIzaSyARO3Yy1xMWq4O_rBVkepZbROtcf6vt0yg",

@@ -1,5 +1,5 @@
 import { SliderThumb } from "@mui/material";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { useParams } from "react-router-dom";
 import Ingredients from "./Ingredients";
 import "./DetailedCocktail.css";
@@ -8,21 +8,35 @@ import {CocktailContext} from "./store/store";
 import Chat from "./elements/Chat";
 
 function DetailedCocktail(props) {
-  const ctx = useContext(CocktailContext);
 
-  console.log(ctx.cocktailID);
 
-  const { id } = useParams();
-  console.log("id", id);
-  let single = props.arr.drinks.filter((drink) => {
-    return drink.idDrink === ctx.cocktailID;
-  });
+  
+  
 
-  console.log(single);
+  const {cocktailArray, DataFetcher} = useContext(CocktailContext)
 
-  console.log(ctx.cocktailID);
+  const {id} = useParams()
+  console.log('id', id)
+  
 
-  if (single) {
+  useEffect(() => {
+    
+  DataFetcher()
+    // return () => {
+    //   second
+    // }
+  }, [])
+
+  
+
+ 
+
+  if (cocktailArray) {
+    let single = cocktailArray.drinks.filter((drink) => {
+      return drink.idDrink === id;
+    })
+    console.log(single);
+    
     return (
       <div className="image">
         <img src={single[0].strDrinkThumb} alt="Broken" />
