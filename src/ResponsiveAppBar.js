@@ -23,7 +23,7 @@ const ResponsiveAppBar = () => {
   const [anchorElNav, setAnchorElNav] = React.useState(null);
   const [anchorElUser, setAnchorElUser] = React.useState(null);
 
-  const {loginState, setLoginState} = useContext(CocktailContext);
+  const {loginState, setLoginState, profilePicUrl} = useContext(CocktailContext);
   const {userName} = useContext(CocktailContext);
 
   console.log(userName);
@@ -68,6 +68,7 @@ const [clickedButton, setclickedButton] = useState()
   }
   }
 
+  
 
 
   return (
@@ -169,7 +170,7 @@ const [clickedButton, setclickedButton] = useState()
                 }
                 sx={{ p: 0 }}
               >
-                <Avatar alt="Remy Sharp" src="/static/images/avatar/2.jpg" />
+                <Avatar alt="Remy Sharp" src={profilePicUrl} />
               </IconButton>
             </Tooltip>
             <Menu

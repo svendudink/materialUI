@@ -7,12 +7,13 @@ import * as React from "react";
 import ResponsiveAppBar from "./ResponsiveAppBar";
 import CocktailBody from "./CocktailBody";
 import { BrowserRouter as Router, Route, Routes, Link, useParams } from "react-router-dom";
-import LoginGoogle from "./LoginGoogle";
+
 import DetailedCocktail from "./DetailedCocktail";
 import { useState, useEffect, useContext } from "react";
 import { createContext } from "react";
 import Loginplace from "./elements/Loginplace";
 import { CocktailContext, CocktailsContextProvider } from "./store/store";
+
 
 function App(props) {
   // const [cocktailArray, setCocktailArray] = useState(null);
@@ -54,10 +55,17 @@ function App(props) {
         <ResponsiveAppBar />
         <Routes>
           <Route
-            path="/Mainpage"
+            path={"/Mainpage"}
+            
             element={<CocktailBody  />}
           />
-          <Route path="/Login" element={<LoginGoogle />} />
+          <Route
+            path={"/"}
+            
+            element={<CocktailBody  />}
+          />
+       
+          
           <Route
             path="/cocktails/:id"
             element={<DetailedCocktail  />}

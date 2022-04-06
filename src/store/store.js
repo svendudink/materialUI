@@ -16,6 +16,7 @@ export const CocktailsContextProvider = (props) => {
   const [loginState, setLoginState] = useState("notLogged");
   const [userName, setUserName] = useState(undefined);
   // const [cocktailArrayContext, setCocktailArrayContext] = useState('Empty')
+  const [profilePicUrl, setProfilePicUrl] = useState()
 
   
   const [cocktailArray, setCocktailArray] = useState(null);
@@ -54,7 +55,7 @@ export const CocktailsContextProvider = (props) => {
   return (
     <CocktailContext.Provider
     
-      value={{ loginState, setLoginState, userName, setUserName, cocktailArray, setCocktailArray, DataFetcher, cocktailLink }}
+      value={{ loginState, setLoginState, userName, setUserName, cocktailArray, setCocktailArray, DataFetcher, cocktailLink, setProfilePicUrl, profilePicUrl }}
       
     >
       {props.children}

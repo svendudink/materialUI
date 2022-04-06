@@ -29,13 +29,15 @@ function Loginplace(props) {
   // Initialize Firebase;
   const [checkIfSignedIn, setCheckIfSignedIn] = useState(false);
   
-  const {userName, setUserName} = useContext(CocktailContext);
+  const {userName, setUserName, setProfilePicUrl} = useContext(CocktailContext);
 
  console.log(userName);
 
 
  
-
+ function getProfilePicUrl() {
+  setProfilePicUrl(getAuth().currentUser.photoURL || "/static/images/avatar/2.jpg")
+}
 
 
 
@@ -66,6 +68,7 @@ function Loginplace(props) {
     await signInWithPopup(getAuth(), provider);
     setCheckIfSignedIn(isUserSignedIn());
     setUserName(getAuth().currentUser.displayName);
+    getProfilePicUrl()
   }
 
 

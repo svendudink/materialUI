@@ -5,7 +5,7 @@ import Ingredients from "./Ingredients";
 import "./DetailedCocktail.css";
 import { useContext } from "react";
 import {CocktailContext} from "./store/store";
-import Chat from "./elements/Chat";
+import Chat from "./Chat";
 
 function DetailedCocktail(props) {
 
@@ -13,7 +13,7 @@ function DetailedCocktail(props) {
   
   
 
-  const {cocktailArray, DataFetcher} = useContext(CocktailContext)
+  const {cocktailArray, DataFetcher, cocktailLink} = useContext(CocktailContext)
 
   const {id} = useParams()
   console.log('id', id)
@@ -25,7 +25,7 @@ function DetailedCocktail(props) {
     // return () => {
     //   second
     // }
-  }, [])
+  }, [cocktailLink])
 
   
 
@@ -46,7 +46,7 @@ function DetailedCocktail(props) {
         <Ingredients single={single} />
         <h1>Preperation</h1>
         <li>{single[0].strInstructions}</li>
-        <Chat />
+        <div><Chat id={id}/></div>
       </div>
       
     );
